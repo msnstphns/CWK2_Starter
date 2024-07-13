@@ -5,12 +5,44 @@
 //  Created by G Lukka.
 //
 
+/*
+ List(forecastListVM.forecasts, id: \.day) { day in
+         VStack(alignment: .leading) {
+             Text(day.day)
+                 .fontWeight(.bold)
+             HStack(alignment: .center) {
+                 WebImage(url: day.weatherIconURL)
+                     .resizable()
+                     .placeholder {
+                         Image(systemName: "hourglass")
+                     }
+                     .scaledToFit()
+                     .frame(width: 75)
+                 VStack(alignment: .leading) {
+                     Text(day.overview)
+                         .font(.title2)
+                     HStack {
+                         Text(day.high)
+                         Text(day.low)
+                     }
+                     HStack {
+                         Text(day.clouds)
+                         Text(day.pop)
+                     }
+                     Text(day.humidity)
+                 }
+             }
+         }
+     }
+ */
+
 import SwiftUI
 
 struct DailyView: View {
     var day : Daily
    
     var body: some View {
+        
         
         HStack {
             Text("Weather icon")

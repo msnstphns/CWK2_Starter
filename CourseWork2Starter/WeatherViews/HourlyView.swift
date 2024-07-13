@@ -12,16 +12,21 @@ struct HourlyView: View {
    @EnvironmentObject var modelData: ModelData
 
     var body: some View {
-        VStack{
-
-            List {
-                ForEach(modelData.forecast!.hourly) { hour in
-                    HourCondition(current: hour)
-                    
+        ZStack {
+            Image("sky")
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
+            VStack{
+                
+                List {
+                    ForEach(modelData.forecast!.hourly) { hour in
+                        HourCondition(current: hour)
+                        
+                    }
                 }
             }
         }
-
     }
 }
 

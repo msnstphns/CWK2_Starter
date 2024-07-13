@@ -48,4 +48,9 @@ class ModelData: ObservableObject {
             fatalError("Couldn't parse \(filename) as \(Forecast.self):\n\(error)")
         }
     }
+    
+    func getIconURL(for iconCode: String) -> URL? {
+            return URL(string: "https://openweathermap.org/img/wn/\(iconCode)@2x.png")
+        }
+    
 }

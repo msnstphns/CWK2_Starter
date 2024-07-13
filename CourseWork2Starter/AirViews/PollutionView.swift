@@ -18,16 +18,44 @@ struct PollutionView: View {
             // Use ZStack for background images
             
             VStack {
-                Text("")
-                Spacer()
-                Text("This is a mixed view with weather \n and air quality data,\n refer to Figure 5 to see what data must be displayed here")
-                Spacer()
-
+                Text("Air Quality Data: ")
+                
+                
+                HStack {
+                    
+                    VStack {
+                        Image("so2")
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                        Text("95")
                     }
                     
+                    VStack {
+                        Image("no")
+                                .resizable()
+                            .frame(width: 50, height: 50)
+                        Text("95")
+                    }
+                    
+                    VStack {
+                        
+                        Image("voc")
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                        Text("95")
+                    }
+                    
+                    VStack {
+                        Image("pm")
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                        Text("95")
+                    }
+                }
                 
-                .foregroundColor(.black)
-                .shadow(color: .black,  radius: 0.5)
+            }
+                
+
                 
             }.ignoresSafeArea(edges: [.top, .trailing, .leading])
         }

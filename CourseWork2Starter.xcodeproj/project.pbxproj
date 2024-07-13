@@ -25,6 +25,9 @@
 		25AE539E29C3CD0E0024DED1 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AE539D29C3CD0E0024DED1 /* Home.swift */; };
 		25AE53A029C3CD150024DED1 /* CurrentWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AE539F29C3CD150024DED1 /* CurrentWeatherView.swift */; };
 		25AE53A329C3CD460024DED1 /* PollutionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AE53A229C3CD460024DED1 /* PollutionView.swift */; };
+		999355472C42D670002F8DA7 /* PollutionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999355462C42D670002F8DA7 /* PollutionModel.swift */; };
+		999355492C42D67E002F8DA7 /* PollutionStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999355482C42D67E002F8DA7 /* PollutionStructures.swift */; };
+		9993554B2C42EFA1002F8DA7 /* DateTimeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993554A2C42EFA1002F8DA7 /* DateTimeHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +50,9 @@
 		25AE539D29C3CD0E0024DED1 /* Home.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		25AE539F29C3CD150024DED1 /* CurrentWeatherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentWeatherView.swift; sourceTree = "<group>"; };
 		25AE53A229C3CD460024DED1 /* PollutionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollutionView.swift; sourceTree = "<group>"; };
+		999355462C42D670002F8DA7 /* PollutionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollutionModel.swift; sourceTree = "<group>"; };
+		999355482C42D67E002F8DA7 /* PollutionStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollutionStructures.swift; sourceTree = "<group>"; };
+		9993554A2C42EFA1002F8DA7 /* DateTimeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +136,7 @@
 			children = (
 				25AE538729C3CC580024DED1 /* LocationHelper.swift */,
 				25AE538929C3CC610024DED1 /* WindDirHelper.swift */,
+				9993554A2C42EFA1002F8DA7 /* DateTimeHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -145,6 +152,8 @@
 		25AE53A429C3CD9B0024DED1 /* AirModel */ = {
 			isa = PBXGroup;
 			children = (
+				999355462C42D670002F8DA7 /* PollutionModel.swift */,
+				999355482C42D67E002F8DA7 /* PollutionStructures.swift */,
 			);
 			path = AirModel;
 			sourceTree = "<group>";
@@ -224,9 +233,12 @@
 				25AE539629C3CCF20024DED1 /* DailyView.swift in Sources */,
 				25AE538C29C3CC710024DED1 /* Structures.swift in Sources */,
 				25AE539429C3CCEA0024DED1 /* NavBar.swift in Sources */,
+				9993554B2C42EFA1002F8DA7 /* DateTimeHelper.swift in Sources */,
 				25AE538829C3CC580024DED1 /* LocationHelper.swift in Sources */,
 				25AE537729C3CB4C0024DED1 /* ContentView.swift in Sources */,
+				999355472C42D670002F8DA7 /* PollutionModel.swift in Sources */,
 				25AE539E29C3CD0E0024DED1 /* Home.swift in Sources */,
+				999355492C42D67E002F8DA7 /* PollutionStructures.swift in Sources */,
 				25AE53A329C3CD460024DED1 /* PollutionView.swift in Sources */,
 				25AE537529C3CB4C0024DED1 /* CourseWork2StarterApp.swift in Sources */,
 				25AE539229C3CCE20024DED1 /* ForecastView.swift in Sources */,
