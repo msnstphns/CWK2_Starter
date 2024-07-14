@@ -10,32 +10,53 @@ import SwiftUI
 struct HourCondition: View {
     @EnvironmentObject var modelData: ModelData
     var current : Current
-  
+    
     
     var body: some View {
-
-
-        HStack {
-            Text(Date(timeIntervalSince1970: TimeInterval((Int(current.dt ?? 0))))
-                .formatted(.dateTime.hour()))
-            
-            Text("\(Int(current.temp))°C")
-            
-
-
-            
-                    if let weatherDescription = current.weather.first?.weatherDescription.rawValue {
-                        Text(weatherDescription.capitalized)
-                    } else {
-                        Text("N/A")
+        
+        ZStack {
+            /*Image("background 1")
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)*/
+            HStack {
+                VStack {
+                    Text(Date(timeIntervalSince1970: TimeInterval((Int(current.dt ))))
+                        .formatted(.dateTime.hour()))
+                    
+                    Text(Date(timeIntervalSince1970: TimeInterval((Int(current.dt ))))
+                        .formatted(.dateTime.weekday(.abbreviated)))
+                }
+                
+                if let iconCode = current.weather.first?.icon {
+                    AsyncImage(url: URL(string: "https://openweathermap.org/img/wn/\(iconCode)@2x.png")) { image in
+                        image.resizable()
+                    } placeholder: {
+                        ProgressView() // Show a progress view while loading the image
                     }
-
-
-
-                    Spacer()
-                }.padding()
-            }
+                    .frame(width:75, height: 75) // Adjust size as needed
+                }
+                
+                Text("\(Int(current.temp))°C")
+                
+                
+                
+                
+                
+                
+                if let weatherDescription = current.weather.first?.weatherDescription.rawValue {
+                    Text(weatherDescription.capitalized)
+                } else {
+                    Text("N/A")
+                }
+                
+                
+                
+                Spacer()
+            }.padding()
         }
+    }
+}
 
 func formatDate(unixTimestamp: Int, format: String, timezone: String?) -> String {
     let date = Date(timeIntervalSince1970: TimeInterval(unixTimestamp))

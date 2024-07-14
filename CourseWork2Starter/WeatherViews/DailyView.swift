@@ -39,22 +39,36 @@
 import SwiftUI
 
 struct DailyView: View {
+    @EnvironmentObject var modelData: ModelData
     var day : Daily
    
     var body: some View {
-        
+
         
         HStack {
-            Text("Weather icon")
+            if let iconCode = day.weather.first?.icon {
+                AsyncImage(url: URL(string: "https://openweathermap.org/img/wn/\(iconCode)@2x.png")) { image in
+                    image.resizable()
+                } placeholder: {
+                    ProgressView()
+                }
+                .frame(width: 40, height: 40)
+            }
             Spacer()
             VStack {
-                Text("Weather description")
+                if let weatherDescription = day.weather.first?.weatherDescription.rawValue {
+                    Text(weatherDescription.capitalized)
+                } else {
+                    Text("N/A")
+                }
                 
-                Text("Day and 2 digit date")
+                Text(getFormattedDate(date: day.dt))
+                
                 
             }
             Spacer()
-            Text("high temp and low temp")
+            Text("\(Int(day.temp.max))°C / \(Int(day.temp.min))°C")
+
            
         }.padding()
     }

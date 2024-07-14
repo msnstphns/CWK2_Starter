@@ -35,40 +35,62 @@ struct CurrentWeatherView: View {
                         Text("\((Int)(modelData.forecast!.current.temp))ºC")
                             .padding()
                             .font(.largeTitle)
+                        
                         HStack {
-
+                            if let iconCode = modelData.forecast!.current.weather.first?.icon {
+                                AsyncImage(url: URL(string: "https://openweathermap.org/img/wn/\(iconCode)@2x.png")) { image in
+                                    image.resizable()
+                                } placeholder: {
+                                    ProgressView() // Show a progress view while loading the image
+                                }
+                                .frame(width:75, height: 75) // Adjust size as needed
+                            }
                             Text(modelData.forecast!.current.weather[0].weatherDescription.rawValue.capitalized)
                                 .foregroundColor(.black)
                         }
                         
                         HStack {
-                            Text("H: \((Int)(modelData.forecast!.daily.first?.temp.max ?? 0))")
+                            Text("High: \((Int)(modelData.forecast!.daily.first?.temp.max ?? 0))ºC")
                             
-                            Text("L: \((Int)(modelData.forecast!.daily.first?.temp.morn ?? 0))")
+                            Text("Low: \((Int)(modelData.forecast!.daily.first?.temp.morn ?? 0))ºC")
+                            
                         }
+                        
+                        VStack {
+                            Text("Feels Like: \((Int)(modelData.forecast!.current.feelsLike))ºC")
+                                .foregroundColor(.black)
+                            
+                        }
+                        .padding(.top)
+                        
+                        
+                        HStack {
+                            Text("Wind Speed: \(Int(modelData.forecast!.current.windSpeed)) mph")
 
-                        Text("Feels Like: \((Int)(modelData.forecast!.current.feelsLike))ºC")
-                            .foregroundColor(.black)
+
+                            // use the WindDirHelper function to convert the wind direction from a number to the actual direction
+                            Text("Direction: \(convertDegToCardinal(deg: Int(modelData.forecast!.current.windDeg)))")
+                        }
+                        .padding(.top)
                         
                         HStack {
-                            Text("Wind Speed: \((Double)(modelData.forecast!.current.windSpeed))")
+                            Text("Humidity: \((Int)(modelData.forecast!.current.humidity))%")
                             
-                            Text("Direction: \((Int)(modelData.forecast!.current.windDeg))")
+                            
+                            Text("Pressure: \((Int)(modelData.forecast!.current.pressure)) hPg")
+                            
                         }
+                        .padding(.top)
                         
                         HStack {
-                            Text("Humidity: \((Int)(modelData.forecast!.current.humidity))")
+
+                            Text("Sunset: \(formatUnixTime(Int(modelData.forecast!.daily.first?.sunset ?? 0)))")
                             
+
                             
-                            Text("Pressure: \((Int)(modelData.forecast!.current.pressure))")
-                            
+                            Text("Sunrise: \(formatUnixTime(Int(modelData.forecast!.daily.first?.sunrise ?? 0)))")
                         }
-                        
-                        HStack {
-                            Text("Sunset\((Int)(modelData.forecast!.daily.first?.sunset ?? 0))")
-                            
-                            Text("Sunrise\((Int)(modelData.forecast!.daily.first?.sunrise ?? 0))")
-                        }
+                        .padding(.top)
                         
                     }.padding()
                 }

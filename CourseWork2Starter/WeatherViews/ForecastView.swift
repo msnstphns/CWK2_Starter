@@ -12,11 +12,7 @@ struct ForecastView: View {
     @State var locationString: String = "No location"
     var body: some View {
         
-        VStack{Text("This is the ForeCastView that displays daily weather summary for next 7 days with icons as per Figure 4.\n Build this view here")
-                .font(.subheadline)
-                .fontWeight(.semibold)
-                .multilineTextAlignment(.center)
-                .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+        VStack{
 
             List{
                 ForEach(modelData.forecast!.daily) { day in
