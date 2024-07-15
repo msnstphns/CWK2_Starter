@@ -15,7 +15,6 @@ struct Home: View {
                 .scaledToFill()
                 .edgesIgnoringSafeArea(.all)
             VStack {
-                //Spacer()
                 HStack {
                     Spacer()
                     
@@ -30,7 +29,6 @@ struct Home: View {
                         SearchView(isSearchOpen: $isSearchOpen, userLocation: $userLocation)
                     }
                     .padding()
-                    
                     Spacer()
                 }
                 
@@ -48,6 +46,7 @@ struct Home: View {
                 .shadow(color: .black, radius: 1)
                 
                 HStack {
+                    // icon
                     if let iconCode = modelData.forecast?.current.weather.first?.icon {
                         AsyncImage(url: URL(string: "https://openweathermap.org/img/wn/\(iconCode)@2x.png")) { image in
                             image.resizable()
@@ -56,6 +55,7 @@ struct Home: View {
                         }
                         .frame(width:75, height: 75)
                     }
+                    // weather description
                     let currentWeatherDescription = modelData.forecast?.current.weather.first?.weatherDescription
                     
                     Text(" \(currentWeatherDescription!.rawValue.capitalized)")
@@ -64,7 +64,8 @@ struct Home: View {
                         .foregroundColor(.black)
                         .shadow(color: .black, radius: 0.5)
                 }
-
+                
+                // temperature
                 HStack {
                     Image("temperature")
                         .resizable()
@@ -76,6 +77,7 @@ struct Home: View {
                         .shadow(color: .black, radius: 0.5)
                 }
                 
+                // humidity
                 HStack {
                     Image("humidity")
                         .resizable()
@@ -87,6 +89,7 @@ struct Home: View {
                         .shadow(color: .black, radius: 0.5)
                 }
                 
+                // pressure
                 HStack {
                     Image("pressure")
                         .resizable()
@@ -98,6 +101,7 @@ struct Home: View {
                         .shadow(color: .black, radius: 0.5)
                 }
                 
+                // wind speed
                 HStack {
                     Image("windSpeed")
                         .resizable()
@@ -109,7 +113,6 @@ struct Home: View {
                         .shadow(color: .black, radius: 0.5)
                 }
             }
-             
             .onAppear {
                 Task.init {
                     self.userLocation = await getLocFromLatLong(lat: modelData.forecast!.lat, lon: modelData.forecast!.lon)

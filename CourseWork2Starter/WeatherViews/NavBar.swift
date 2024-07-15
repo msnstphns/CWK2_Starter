@@ -11,7 +11,7 @@ struct NavBar: View {
     
     var body: some View {
         TabView{
-           Home()
+            Home()
                 .tabItem{
                     Image(systemName: "magnifyingglass")
                     Text("City")
@@ -42,7 +42,7 @@ struct NavBar: View {
         }
         
     }
-        
+    
 }
 
 struct NavBarView_Previews: PreviewProvider {

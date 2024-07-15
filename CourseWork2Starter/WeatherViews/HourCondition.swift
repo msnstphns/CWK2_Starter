@@ -8,13 +8,13 @@ struct HourCondition: View {
     var body: some View {
         
         ZStack {
-            
-            /*Image("background 1")
+            /*Image("sky")
                 .resizable()
                 .scaledToFill()
                 .edgesIgnoringSafeArea(.all)*/
             HStack {
                 VStack {
+                    // time and then day underneath
                     Text(Date(timeIntervalSince1970: TimeInterval((Int(current.dt ))))
                         .formatted(.dateTime.hour()))
                     
@@ -22,6 +22,7 @@ struct HourCondition: View {
                         .formatted(.dateTime.weekday(.abbreviated)))
                 }
                 
+                // weather icon
                 if let iconCode = current.weather.first?.icon {
                     AsyncImage(url: URL(string: "https://openweathermap.org/img/wn/\(iconCode)@2x.png")) { image in
                         image.resizable()
@@ -31,8 +32,10 @@ struct HourCondition: View {
                     .frame(width:75, height: 75)
                 }
                 
+                // current temperature
                 Text("\(Int(current.temp))°C")
 
+                // current weather description
                 if let weatherDescription = current.weather.first?.weatherDescription.rawValue {
                     Text(weatherDescription.capitalized)
                 } else {
@@ -43,17 +46,6 @@ struct HourCondition: View {
         }
     }
 }
-
-func formatDate(unixTimestamp: Int, format: String, timezone: String?) -> String {
-    let date = Date(timeIntervalSince1970: TimeInterval(unixTimestamp))
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = format
-    if let timezone = timezone {
-        dateFormatter.timeZone = TimeZone(identifier: timezone)
-    }
-    return dateFormatter.string(from: date)
-}
-
 
 struct HourCondition_Previews: PreviewProvider {
     static var hourly = ModelData().forecast!.hourly

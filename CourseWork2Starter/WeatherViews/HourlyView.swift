@@ -6,13 +6,13 @@ struct HourlyView: View {
 
     var body: some View {
         ZStack {
-            
-            Image("sky")
+            /*Image("sky")
                 .resizable()
                 .scaledToFill()
-                .edgesIgnoringSafeArea(.all)
+                .edgesIgnoringSafeArea(.all)*/
             VStack{
                 
+                // list of hourly forecasts
                 List {
                     ForEach(modelData.forecast!.hourly) { hour in
                         HourCondition(current: hour)

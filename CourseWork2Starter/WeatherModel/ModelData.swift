@@ -49,6 +49,7 @@ class ModelData: ObservableObject {
         }
     }
     
+    // function to retieve icon from OpenWeather using API
     func getIconURL(for iconCode: String) -> URL? {
             return URL(string: "https://openweathermap.org/img/wn/\(iconCode)@2x.png")
         }

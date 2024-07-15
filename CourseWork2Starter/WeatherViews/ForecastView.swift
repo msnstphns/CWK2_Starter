@@ -8,23 +8,24 @@
 import SwiftUI
 
 struct ForecastView: View {
+    
     @EnvironmentObject var modelData: ModelData
     @State var locationString: String = "No location"
+    
     var body: some View {
         
-        VStack{
-
-            List{
+        VStack {
+            // list of daily forecasts
+            List {
                 ForEach(modelData.forecast!.daily) { day in
                     DailyView(day: day)
                 }
             }
         }
-
         .onAppear {
             Task.init {
                 self.locationString = await getLocFromLatLong(lat: modelData.forecast!.lat, lon: modelData.forecast!.lon)
-               
+                
             }
         }
     }

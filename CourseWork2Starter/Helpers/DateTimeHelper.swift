@@ -23,14 +23,12 @@ func getFormattedDate(date: Int) -> String {
         return dateFormatter.string(from: date)
     }
 
-/*// helper function to format the Unix timestamp
-    func formatDate(unixTimestamp: Int, format: String, timezone: String?) -> String {
-        let date = Date(timeIntervalSince1970: TimeInterval(unixTimestamp))
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
-        if let timezone = timezone {
-            dateFormatter.timeZone = TimeZone(identifier: timezone)
-        }
-        return dateFormatter.string(from: date)
+func formatDate(unixTimestamp: Int, format: String, timezone: String?) -> String {
+    let date = Date(timeIntervalSince1970: TimeInterval(unixTimestamp))
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = format
+    if let timezone = timezone {
+        dateFormatter.timeZone = TimeZone(identifier: timezone)
     }
-*/
+    return dateFormatter.string(from: date)
+}

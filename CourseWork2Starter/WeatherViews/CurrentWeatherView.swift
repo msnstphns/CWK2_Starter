@@ -12,92 +12,96 @@ struct CurrentWeatherView: View {
     @EnvironmentObject var modelData: ModelData
     
     @State var userLocation: String = ""
-
+    
     
     var body: some View {
         ZStack {
             Image("sky")
-                            .resizable()
-                            .scaledToFill()
-                            .edgesIgnoringSafeArea(.all)
-                
-
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
+            
+            VStack {
                 VStack {
- 
-                    VStack {
-                        Text(userLocation)
-                            .font(.title)
-                            .foregroundColor(.black)
-                            .shadow(color: .black, radius: 0.5)
-                            .multilineTextAlignment(.center)
-                        
-                        Text("\((Int)(modelData.forecast!.current.temp))ºC")
-                            .padding()
-                            .font(.largeTitle)
-                        
-                        HStack {
-                            if let iconCode = modelData.forecast!.current.weather.first?.icon {
-                                AsyncImage(url: URL(string: "https://openweathermap.org/img/wn/\(iconCode)@2x.png")) { image in
-                                    image.resizable()
-                                } placeholder: {
-                                    ProgressView() // Show a progress view while loading the image
-                                }
-                                .frame(width:75, height: 75) // Adjust size as needed
+                    // location
+                    Text(userLocation)
+                        .font(.title)
+                        .foregroundColor(.black)
+                        .shadow(color: .black, radius: 0.5)
+                        .multilineTextAlignment(.center)
+                    
+                    // temperature
+                    Text("\((Int)(modelData.forecast!.current.temp))ºC")
+                        .padding()
+                        .font(.largeTitle)
+                    
+                    HStack {
+                        // weather icon
+                        if let iconCode = modelData.forecast!.current.weather.first?.icon {
+                            AsyncImage(url: URL(string: "https://openweathermap.org/img/wn/\(iconCode)@2x.png")) { image in
+                                image.resizable()
+                            } placeholder: {
+                                Text("Icon loading...")
                             }
-                            Text(modelData.forecast!.current.weather[0].weatherDescription.rawValue.capitalized)
-                                .foregroundColor(.black)
+                            .frame(width:75, height: 75)
                         }
+                        // weather description
+                        Text(modelData.forecast!.current.weather[0].weatherDescription.rawValue.capitalized)
+                            .foregroundColor(.black)
+                    }
+                    // high and low temperatures
+                    HStack {
+                        Text("High: \((Int)(modelData.forecast!.daily.first?.temp.max ?? 0))ºC")
                         
-                        HStack {
-                            Text("High: \((Int)(modelData.forecast!.daily.first?.temp.max ?? 0))ºC")
-                            
-                            Text("Low: \((Int)(modelData.forecast!.daily.first?.temp.morn ?? 0))ºC")
-                            
-                        }
+                        Text("Low: \((Int)(modelData.forecast!.daily.first?.temp.morn ?? 0))ºC")
                         
-                        VStack {
-                            Text("Feels Like: \((Int)(modelData.forecast!.current.feelsLike))ºC")
-                                .foregroundColor(.black)
-                            
-                        }
-                        .padding(.top)
+                    }
+                    
+                    VStack {
+                        // feels like temperature
+                        Text("Feels Like: \((Int)(modelData.forecast!.current.feelsLike))ºC")
+                            .foregroundColor(.black)
+                        
+                    }
+                    .padding(.top)
+                    
+                    
+                    HStack {
+                        // wind speed
+                        Text("Wind Speed: \(Int(modelData.forecast!.current.windSpeed)) mph")
                         
                         
-                        HStack {
-                            Text("Wind Speed: \(Int(modelData.forecast!.current.windSpeed)) mph")
-
-
-                            // use the WindDirHelper function to convert the wind direction from a number to the actual direction
-                            Text("Direction: \(convertDegToCardinal(deg: Int(modelData.forecast!.current.windDeg)))")
-                        }
-                        .padding(.top)
+                        // use the WindDirHelper function to convert the wind direction from a number to the actual direction
+                        Text("Direction: \(convertDegToCardinal(deg: Int(modelData.forecast!.current.windDeg)))")
+                    }
+                    .padding(.top)
+                    
+                    HStack {
+                        // humidity %
+                        Text("Humidity: \((Int)(modelData.forecast!.current.humidity))%")
                         
-                        HStack {
-                            Text("Humidity: \((Int)(modelData.forecast!.current.humidity))%")
-                            
-                            
-                            Text("Pressure: \((Int)(modelData.forecast!.current.pressure)) hPg")
-                            
-                        }
-                        .padding(.top)
+                        // pressure hPa
+                        Text("Pressure: \((Int)(modelData.forecast!.current.pressure)) hPg")
                         
-                        HStack {
-
-                            Text("Sunset: \(formatUnixTime(Int(modelData.forecast!.daily.first?.sunset ?? 0)))")
-                            
-
-                            
-                            Text("Sunrise: \(formatUnixTime(Int(modelData.forecast!.daily.first?.sunrise ?? 0)))")
-                        }
-                        .padding(.top)
+                    }
+                    .padding(.top)
+                    
+                    HStack {
+                        // sunset time
+                        Text("Sunset: \(formatUnixTime(Int(modelData.forecast!.daily.first?.sunset ?? 0)))")
                         
-                    }.padding()
-                }
-
+                        
+                        // sunrise time
+                        Text("Sunrise: \(formatUnixTime(Int(modelData.forecast!.daily.first?.sunrise ?? 0)))")
+                    }
+                    .padding(.top)
+                    
+                }.padding()
+            }
             .foregroundColor(.black)
             .shadow(color: .black,  radius: 0.5)
-            
             .onAppear {
+                // load the location from the getLocFromLatLong function
                 Task.init {
                     self.userLocation = await getLocFromLatLong(lat: modelData.forecast!.lat, lon: modelData.forecast!.lon)
                 }

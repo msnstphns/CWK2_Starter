@@ -22,7 +22,7 @@ struct PollutionView: View {
                 .scaledToFill()
                 .edgesIgnoringSafeArea(.all)
             VStack {
-                
+                // location
                 Text(userLocation)
                     .font(.title)
                     .foregroundColor(.black)
@@ -36,7 +36,7 @@ struct PollutionView: View {
                 .foregroundColor(.black)
                 .shadow(color: .black, radius: 1)
                 
-                
+                // weather description
                 let currentWeatherDescription = modelData.forecast?.current.weather.first?.weatherDescription
                 
                 Text(" \(currentWeatherDescription!.rawValue.capitalized)")
@@ -47,6 +47,7 @@ struct PollutionView: View {
                 
                 
                 HStack {
+                    // temperature
                     Image("temperature")
                         .resizable()
                         .frame(width: 50, height: 50)
@@ -58,6 +59,7 @@ struct PollutionView: View {
                 }
                 
                 HStack {
+                    // humidity
                     Image("humidity")
                         .resizable()
                         .frame(width: 50, height: 50)
@@ -69,6 +71,7 @@ struct PollutionView: View {
                 }
                 
                 HStack {
+                    // pressure
                     Image("pressure")
                         .resizable()
                         .frame(width: 50, height: 50)
@@ -80,6 +83,7 @@ struct PollutionView: View {
                 }
                 
                 HStack {
+                    // wind speed
                     Image("windSpeed")
                         .resizable()
                         .frame(width: 50, height: 50)
@@ -92,39 +96,41 @@ struct PollutionView: View {
                 .padding(.bottom)
                 
                 VStack {
-                    
+                    // air quality information
                     Text("Air Quality Data: ")
                         .bold()
                     
                     HStack {
-                        
+                        // so2
                         VStack {
                             Image("so2")
                                 .resizable()
                                 .frame(width: 50, height: 50)
-                            Text("95")
+                            Text("0")
                         }
                         
                         VStack {
+                            // no
                             Image("no")
                                 .resizable()
                                 .frame(width: 50, height: 50)
-                            Text("95")
+                            Text("0")
                         }
                         
                         VStack {
-                            
+                            // voc
                             Image("voc")
                                 .resizable()
                                 .frame(width: 50, height: 50)
-                            Text("95")
+                            Text("0")
                         }
                         
                         VStack {
+                            // pm
                             Image("pm")
                                 .resizable()
                                 .frame(width: 50, height: 50)
-                            Text("95")
+                            Text("0")
                         }
                     }
                 }
