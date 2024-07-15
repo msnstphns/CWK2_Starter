@@ -1,10 +1,3 @@
-//
-//  SearchView.swift
-//  CWK2_23_GL
-//
-//  Created by GirishALukka on 11/03/2023.
-//
-
 import SwiftUI
 import CoreLocation
 
@@ -15,20 +8,16 @@ struct SearchView: View {
     @State private var location = ""
     @Binding var userLocation: String
     @State private var errorMessage: String?
-
+    
     var body: some View {
         Spacer()
         ZStack {
-            Color.teal
-                .ignoresSafeArea()
+            Image("sky")
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
             
             VStack {
-                Text("Enter a new location to fetch weather data. Press return/enter to confirm.")
-                    .font(.subheadline)
-                    .fontWeight(.bold)
-                    .multilineTextAlignment(.center)
-                    .padding()
-                
                 TextField("Enter New Location", text: $location, onCommit: {
                     geocodeLocation()
                 })
@@ -76,4 +65,5 @@ struct SearchView: View {
             }
         }
     }
+    
 }

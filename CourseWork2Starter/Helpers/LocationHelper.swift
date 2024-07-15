@@ -6,10 +6,9 @@
 //
 
 import Foundation
-
 import CoreLocation
-func getLocFromLatLong(lat: Double, lon: Double) async -> String
-{
+
+func getLocFromLatLong(lat: Double, lon: Double) async -> String {
     var locationString: String
     var placemarks: [CLPlacemark]
     let center: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: lat, longitude: lon)

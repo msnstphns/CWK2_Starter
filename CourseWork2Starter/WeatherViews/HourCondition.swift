@@ -1,10 +1,3 @@
-//
-//  HourCondition.swift
-//  Coursework2
-//
-//  Created by G Lukka.
-//
-
 import SwiftUI
 
 struct HourCondition: View {
@@ -15,6 +8,7 @@ struct HourCondition: View {
     var body: some View {
         
         ZStack {
+            
             /*Image("background 1")
                 .resizable()
                 .scaledToFill()
@@ -32,26 +26,18 @@ struct HourCondition: View {
                     AsyncImage(url: URL(string: "https://openweathermap.org/img/wn/\(iconCode)@2x.png")) { image in
                         image.resizable()
                     } placeholder: {
-                        ProgressView() // Show a progress view while loading the image
+                        Text("Loading image...")
                     }
-                    .frame(width:75, height: 75) // Adjust size as needed
+                    .frame(width:75, height: 75)
                 }
                 
                 Text("\(Int(current.temp))°C")
-                
-                
-                
-                
-                
-                
+
                 if let weatherDescription = current.weather.first?.weatherDescription.rawValue {
                     Text(weatherDescription.capitalized)
                 } else {
                     Text("N/A")
                 }
-                
-                
-                
                 Spacer()
             }.padding()
         }

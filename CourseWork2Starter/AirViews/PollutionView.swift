@@ -13,9 +13,9 @@ struct PollutionView: View {
     //@EnvironmentObject var pollutionModel: PollutionModel
     @State var isSearchOpen: Bool = false
     @State  var userLocation: String = ""
-
+    
     var body: some View {
-
+        
         ZStack {
             Image("sky")
                 .resizable()
@@ -96,7 +96,6 @@ struct PollutionView: View {
                     Text("Air Quality Data: ")
                         .bold()
                     
-                    
                     HStack {
                         
                         VStack {
@@ -104,45 +103,40 @@ struct PollutionView: View {
                                 .resizable()
                                 .frame(width: 50, height: 50)
                             Text("95")
-                            
-                            
-                            
-                            VStack {
-                                Image("no")
-                                    .resizable()
-                                    .frame(width: 50, height: 50)
-                                Text("95")
-                            }
-                            
-                            VStack {
-                                
-                                Image("voc")
-                                    .resizable()
-                                    .frame(width: 50, height: 50)
-                                Text("95")
-                            }
-                            
-                            VStack {
-                                Image("pm")
-                                    .resizable()
-                                    .frame(width: 50, height: 50)
-                                Text("95")
-                            }
                         }
                         
+                        VStack {
+                            Image("no")
+                                .resizable()
+                                .frame(width: 50, height: 50)
+                            Text("95")
+                        }
+                        
+                        VStack {
+                            
+                            Image("voc")
+                                .resizable()
+                                .frame(width: 50, height: 50)
+                            Text("95")
+                        }
+                        
+                        VStack {
+                            Image("pm")
+                                .resizable()
+                                .frame(width: 50, height: 50)
+                            Text("95")
+                        }
                     }
-                    
-                    //Spacer()
+                }
+            }
+            .onAppear {
+                Task.init {
+                    self.userLocation = await getLocFromLatLong(lat: modelData.forecast!.lat, lon: modelData.forecast!.lon)
                 }
             }
         }
-            
-
-                
-
-                
-            }//.ignoresSafeArea(edges: [.top, .trailing, .leading])
-        }
+    }
+}
 
 struct PollutionView_Previews: PreviewProvider {
     static var previews: some View {
@@ -150,5 +144,5 @@ struct PollutionView_Previews: PreviewProvider {
         //PollutionView().environmentObject(PollutionModel())
     }
 }
-    
+
 

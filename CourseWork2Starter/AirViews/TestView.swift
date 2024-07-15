@@ -36,7 +36,7 @@ struct TestView: View {
                                 Image("so2")
                                     .resizable()
                                     .frame(width: 50, height: 50)
-
+                                Text("95")
                                 
 
 

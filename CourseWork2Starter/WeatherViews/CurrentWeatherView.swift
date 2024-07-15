@@ -11,8 +11,8 @@ import CoreLocation
 struct CurrentWeatherView: View {
     @EnvironmentObject var modelData: ModelData
     
-    @State var locationString: String = "No location"
-    @State var userLocation: String = "London?"
+    @State var userLocation: String = ""
+
     
     var body: some View {
         ZStack {
@@ -23,8 +23,7 @@ struct CurrentWeatherView: View {
                 
 
                 VStack {
-
-        //          Temperature Info
+ 
                     VStack {
                         Text(userLocation)
                             .font(.title)
@@ -98,6 +97,11 @@ struct CurrentWeatherView: View {
             .foregroundColor(.black)
             .shadow(color: .black,  radius: 0.5)
             
+            .onAppear {
+                Task.init {
+                    self.userLocation = await getLocFromLatLong(lat: modelData.forecast!.lat, lon: modelData.forecast!.lon)
+                }
+            }
         }.ignoresSafeArea(edges: [.top, .trailing, .leading])
     }
 }

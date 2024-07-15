@@ -1,10 +1,3 @@
-//
-//  Hourly.swift
-//  Coursework2
-//
-//  Created by G Lukka.
-//
-
 import SwiftUI
 
 struct HourlyView: View {
@@ -13,6 +6,7 @@ struct HourlyView: View {
 
     var body: some View {
         ZStack {
+            
             Image("sky")
                 .resizable()
                 .scaledToFill()

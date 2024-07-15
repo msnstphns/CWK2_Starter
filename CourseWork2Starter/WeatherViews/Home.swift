@@ -1,10 +1,3 @@
-//
-//  HomeView.swift
-//  CWK2_23_GL
-//
-//  Created by GirishALukka on 10/03/2023.
-//
-
 import SwiftUI
 import CoreLocation
 
@@ -18,9 +11,9 @@ struct Home: View {
     var body: some View {
         ZStack {
             Image("sky")
-                            .resizable()
-                            .scaledToFill()
-                            .edgesIgnoringSafeArea(.all)
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
             VStack {
                 //Spacer()
                 HStack {
@@ -54,27 +47,35 @@ struct Home: View {
                 .foregroundColor(.black)
                 .shadow(color: .black, radius: 1)
                 
-                
-                let currentWeatherDescription = modelData.forecast?.current.weather.first?.weatherDescription
+                HStack {
+                    if let iconCode = modelData.forecast?.current.weather.first?.icon {
+                        AsyncImage(url: URL(string: "https://openweathermap.org/img/wn/\(iconCode)@2x.png")) { image in
+                            image.resizable()
+                        } placeholder: {
+                            Text("Loading image...")
+                        }
+                        .frame(width:75, height: 75)
+                    }
+                    let currentWeatherDescription = modelData.forecast?.current.weather.first?.weatherDescription
                     
-                Text(" \(currentWeatherDescription!.rawValue.capitalized)")
-                                    .padding()
-                                    .font(.title2)
-                                    .foregroundColor(.black)
-                                    .shadow(color: .black, radius: 0.5)
-
+                    Text(" \(currentWeatherDescription!.rawValue.capitalized)")
+                        .padding()
+                        .font(.title2)
+                        .foregroundColor(.black)
+                        .shadow(color: .black, radius: 0.5)
+                }
 
                 HStack {
                     Image("temperature")
                         .resizable()
-                    .frame(width: 50, height: 50)
+                        .frame(width: 50, height: 50)
                     Text("Temp: \((Int)(modelData.forecast!.current.temp))ºC")
                         .padding()
                         .font(.title2)
                         .foregroundColor(.black)
-                    .shadow(color: .black, radius: 0.5)
+                        .shadow(color: .black, radius: 0.5)
                 }
- 
+                
                 HStack {
                     Image("humidity")
                         .resizable()
@@ -90,7 +91,7 @@ struct Home: View {
                     Image("pressure")
                         .resizable()
                         .frame(width: 50, height: 50)
-                    Text("Pressure: \((Int)(modelData.forecast!.current.temp))hPa")
+                    Text("Pressure: \((Int)(modelData.forecast!.current.pressure))hPa")
                         .padding()
                         .font(.title2)
                         .foregroundColor(.black)
@@ -107,18 +108,14 @@ struct Home: View {
                         .foregroundColor(.black)
                         .shadow(color: .black, radius: 0.5)
                 }
-                
-                //Spacer()
             }
+             
             .onAppear {
                 Task.init {
                     self.userLocation = await getLocFromLatLong(lat: modelData.forecast!.lat, lon: modelData.forecast!.lon)
-                    
                 }
-                
+            }
         }
-        }
-        
     }
 }
 
